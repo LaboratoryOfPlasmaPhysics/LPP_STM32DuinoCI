@@ -1,0 +1,1826 @@
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/boards.txt STMicroelectronics/hardware/stm32/2.0.0/boards.txt
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/boards.txt	2021-04-21 00:00:00.000000000 +0200
++++ STMicroelectronics/hardware/stm32/2.0.0/boards.txt	2021-05-21 16:21:05.324828489 +0200
+@@ -12,6 +12,98 @@
+ menu.upload_method=Upload method
+ 
+ ################################################################################
++
++BBoneSensors.name=BBone-Sensors
++
++BBoneSensors.build.core=arduino
++BBoneSensors.build.board=BBoneSensors
++BBoneSensors.build.extra_flags=-D{build.product_line} {build.enable_usb} {build.xSerial}
++
++BBoneSensors.menu.pnum.BBone-Sensors=BBoneSensors F303RD
++BBoneSensors.menu.pnum.BBone-Sensors.node=NODE_F303RE
++BBoneSensors.menu.pnum.BBone-Sensors.upload.maximum_size=393216
++BBoneSensors.menu.pnum.BBone-Sensors.upload.maximum_data_size=65536
++BBoneSensors.menu.pnum.BBone-Sensors.build.mcu=cortex-m4
++BBoneSensors.menu.pnum.BBone-Sensors.build.flags.fp=-mfpu=fpv4-sp-d16 -mfloat-abi=hard
++BBoneSensors.menu.pnum.BBone-Sensors.build.board=BBoneSensors
++BBoneSensors.menu.pnum.BBone-Sensors.build.series=STM32F3xx
++BBoneSensors.menu.pnum.BBone-Sensors.build.product_line=STM32F303xE
++BBoneSensors.menu.pnum.BBone-Sensors.build.variant=BBoneSensorsCape/BBoneSensors
++BBoneSensors.menu.pnum.BBone-Sensors.build.cmsis_lib_gcc=arm_cortexM4lf_math
++
++BBoneSensors.menu.pnum.BBone-Sensors-USB=BBoneSensors F303RD (USB)
++BBoneSensors.menu.pnum.BBone-Sensors-USB.node=NODE_F303RE
++BBoneSensors.menu.pnum.BBone-Sensors-USB.upload.maximum_size=393216
++BBoneSensors.menu.pnum.BBone-Sensors-USB.upload.maximum_data_size=65536
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.mcu=cortex-m4
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.flags.fp=-mfpu=fpv4-sp-d16 -mfloat-abi=hard
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.board=BBoneSensors
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.series=STM32F3xx
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.product_line=STM32F303xE
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.variant=BBoneSensorsCape/BBoneSensors-USB
++BBoneSensors.menu.pnum.BBone-Sensors-USB.build.cmsis_lib_gcc=arm_cortexM4lf_math
++
++# Upload menu
++BBoneSensors.menu.upload_method.MassStorage=Mass Storage
++BBoneSensors.menu.upload_method.MassStorage.upload.protocol=
++BBoneSensors.menu.upload_method.MassStorage.upload.tool=massStorageCopy
++BBoneSensors.menu.upload_method.swdMethod=STM32CubeProgrammer (SWD)
++BBoneSensors.menu.upload_method.swdMethod.upload.protocol=0
++BBoneSensors.menu.upload_method.swdMethod.upload.options=-g
++BBoneSensors.menu.upload_method.swdMethod.upload.tool=stm32CubeProg
++BBoneSensors.menu.upload_method.serialMethod=STM32CubeProgrammer (Serial)
++BBoneSensors.menu.upload_method.serialMethod.upload.protocol=1
++BBoneSensors.menu.upload_method.serialMethod.upload.options={serial.port.file} -s
++BBoneSensors.menu.upload_method.serialMethod.upload.tool=stm32CubeProg
++BBoneSensors.menu.upload_method.dfuMethod=STM32CubeProgrammer (DFU)
++BBoneSensors.menu.upload_method.dfuMethod.upload.protocol=2
++BBoneSensors.menu.upload_method.dfuMethod.upload.options=-g
++BBoneSensors.menu.upload_method.dfuMethod.upload.tool=stm32CubeProg
++BBoneSensors.menu.xserial.generic=Enabled (generic 'Serial')
++BBoneSensors.menu.xserial.none=Enabled (no generic 'Serial')
++BBoneSensors.menu.xserial.none.build.xSerial=-DHAL_UART_MODULE_ENABLED -DHWSERIAL_NONE
++BBoneSensors.menu.xserial.disabled=Disabled (No Serial support)
++BBoneSensors.menu.xserial.disabled.build.xSerial=
++BBoneSensors.menu.usb.none=None
++BBoneSensors.menu.usb.CDCgen=CDC (generic 'Serial' supersede U(S)ART)
++BBoneSensors.menu.usb.CDCgen.build.enable_usb={build.usb_flags} -DUSBD_USE_CDC
++BBoneSensors.menu.usb.CDC=CDC (no generic 'Serial')
++BBoneSensors.menu.usb.CDC.build.enable_usb={build.usb_flags} -DUSBD_USE_CDC -DDISABLE_GENERIC_SERIALUSB
++BBoneSensors.menu.usb.HID=HID (keyboard and mouse)
++BBoneSensors.menu.usb.HID.build.enable_usb={build.usb_flags} -DUSBD_USE_HID_COMPOSITE
++BBoneSensors.menu.xusb.FS=Low/Full Speed
++BBoneSensors.menu.xusb.HS=High Speed
++BBoneSensors.menu.xusb.HS.build.usb_speed=-DUSE_USB_HS
++BBoneSensors.menu.xusb.HSFS=High Speed in Full Speed mode
++BBoneSensors.menu.xusb.HSFS.build.usb_speed=-DUSE_USB_HS -DUSE_USB_HS_IN_FS
++BBoneSensors.menu.opt.osstd=Smallest (-Os default)
++BBoneSensors.menu.opt.oslto=Smallest (-Os) with LTO
++BBoneSensors.menu.opt.oslto.build.flags.optimize=-Os -flto
++BBoneSensors.menu.opt.o1std=Fast (-O1)
++BBoneSensors.menu.opt.o1std.build.flags.optimize=-O1
++BBoneSensors.menu.opt.o1lto=Fast (-O1) with LTO
++BBoneSensors.menu.opt.o1lto.build.flags.optimize=-O1 -flto
++BBoneSensors.menu.opt.o2std=Faster (-O2)
++BBoneSensors.menu.opt.o2std.build.flags.optimize=-O2
++BBoneSensors.menu.opt.o2lto=Faster (-O2) with LTO
++BBoneSensors.menu.opt.o2lto.build.flags.optimize=-O2 -flto
++BBoneSensors.menu.opt.o3std=Fastest (-O3)
++BBoneSensors.menu.opt.o3std.build.flags.optimize=-O3
++BBoneSensors.menu.opt.o3lto=Fastest (-O3) with LTO
++BBoneSensors.menu.opt.o3lto.build.flags.optimize=-O3 -flto
++BBoneSensors.menu.opt.ogstd=Debug (-g)
++BBoneSensors.menu.opt.ogstd.build.flags.optimize=-g -Og
++BBoneSensors.menu.rtlib.nano=Newlib Nano (default)
++BBoneSensors.menu.rtlib.nanofp=Newlib Nano + Float Printf
++BBoneSensors.menu.rtlib.nanofp.build.flags.ldspecs=--specs=nano.specs -u _printf_float
++BBoneSensors.menu.rtlib.nanofs=Newlib Nano + Float Scanf
++BBoneSensors.menu.rtlib.nanofs.build.flags.ldspecs=--specs=nano.specs -u _scanf_float
++BBoneSensors.menu.rtlib.nanofps=Newlib Nano + Float Printf/Scanf
++BBoneSensors.menu.rtlib.nanofps.build.flags.ldspecs=--specs=nano.specs -u _printf_float -u _scanf_float
++BBoneSensors.menu.rtlib.full=Newlib Standard
++BBoneSensors.menu.rtlib.full.build.flags.ldspecs=
++
++################################################################################
+ # Nucleo 144 boards
+ 
+ Nucleo_144.name=Nucleo-144
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/ldscript.ld STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/ldscript.ld
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/ldscript.ld	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/ldscript.ld	2021-04-16 14:25:59.000000000 +0200
+@@ -0,0 +1,180 @@
++/**
++  ******************************************************************************
++  * @file    STM32F303RE_FLASH.h
++  * @author  WI6LABS
++  * @version V1.0.0
++  * @date    27-July-2016
++  * @brief   Linker script for STM32F303RE Device with
++  *          512KByte FLASH, 80KByte RAM
++  *
++  *          Set heap size, stack size and stack location according
++  *          to application requirements.
++  *
++  *          Set memory bank area and size if external memory is used.
++  *
++  ******************************************************************************
++  * @attention
++  *
++  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
++  *
++  * Redistribution and use in source and binary forms, with or without modification,
++  * are permitted provided that the following conditions are met:
++  *   1. Redistributions of source code must retain the above copyright notice,
++  *      this list of conditions and the following disclaimer.
++  *   2. Redistributions in binary form must reproduce the above copyright notice,
++  *      this list of conditions and the following disclaimer in the documentation
++  *      and/or other materials provided with the distribution.
++  *   3. Neither the name of STMicroelectronics nor the names of its contributors
++  *      may be used to endorse or promote products derived from this software
++  *      without specific prior written permission.
++  *
++  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
++  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
++  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
++  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++  *
++  ******************************************************************************
++  */
++
++/* Entry Point */
++ENTRY(Reset_Handler)
++
++/* Highest address of the user mode stack */
++_estack = 0x20010000;    /* end of RAM */
++/* Generate a link error if heap and stack don't fit into RAM */
++_Min_Heap_Size = 0x200;;      /* required amount of heap  */
++_Min_Stack_Size = 0x400;; /* required amount of stack */
++
++/* Specify the memory areas */
++MEMORY
++{
++FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 384K
++RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 64K
++}
++
++/* Define output sections */
++SECTIONS
++{
++  /* The startup code goes first into FLASH */
++  .isr_vector :
++  {
++    . = ALIGN(4);
++    KEEP(*(.isr_vector)) /* Startup code */
++    . = ALIGN(4);
++  } >FLASH
++
++  /* The program code and other data goes into FLASH */
++  .text ALIGN(4):
++  {
++    . = ALIGN(4);
++    *(.text)           /* .text sections (code) */
++    *(.text*)          /* .text* sections (code) */
++    *(.glue_7)         /* glue arm to thumb code */
++    *(.glue_7t)        /* glue thumb to arm code */
++    *(.eh_frame)
++
++    KEEP (*(.init))
++    KEEP (*(.fini))
++
++    . = ALIGN(4);
++    _etext = .;        /* define a global symbols at end of code */
++  } >FLASH
++
++  /* Constant data goes into FLASH */
++  .rodata ALIGN(4):
++  {
++    . = ALIGN(4);
++    *(.rodata)         /* .rodata sections (constants, strings, etc.) */
++    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
++    . = ALIGN(4);
++  } >FLASH
++
++  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
++  .ARM : {
++    __exidx_start = .;
++    *(.ARM.exidx*)
++    __exidx_end = .;
++  } >FLASH
++
++  .preinit_array     :
++  {
++    PROVIDE_HIDDEN (__preinit_array_start = .);
++    KEEP (*(.preinit_array*))
++    PROVIDE_HIDDEN (__preinit_array_end = .);
++  } >FLASH
++  .init_array :
++  {
++    PROVIDE_HIDDEN (__init_array_start = .);
++    KEEP (*(SORT(.init_array.*)))
++    KEEP (*(.init_array*))
++    PROVIDE_HIDDEN (__init_array_end = .);
++  } >FLASH
++  .fini_array :
++  {
++    PROVIDE_HIDDEN (__fini_array_start = .);
++    KEEP (*(SORT(.fini_array.*)))
++    KEEP (*(.fini_array*))
++    PROVIDE_HIDDEN (__fini_array_end = .);
++  } >FLASH
++
++  /* used by the startup to initialize data */
++  _sidata = LOADADDR(.data);
++
++  /* Initialized data sections goes into RAM, load LMA copy after code */
++  .data :
++  {
++    . = ALIGN(4);
++    _sdata = .;        /* create a global symbol at data start */
++    *(.data)           /* .data sections */
++    *(.data*)          /* .data* sections */
++
++    . = ALIGN(4);
++    _edata = .;        /* define a global symbol at data end */
++  } >RAM AT> FLASH
++
++
++  /* Uninitialized data section */
++  . = ALIGN(4);
++  .bss :
++  {
++    /* This is used by the startup in order to initialize the .bss secion */
++    _sbss = .;         /* define a global symbol at bss start */
++    __bss_start__ = _sbss;
++    *(.bss)
++    *(.bss*)
++    *(COMMON)
++
++    . = ALIGN(4);
++    _ebss = .;         /* define a global symbol at bss end */
++    __bss_end__ = _ebss;
++  } >RAM
++
++  /* User_heap_stack section, used to check that there is enough RAM left */
++  ._user_heap_stack :
++  {
++    . = ALIGN(4);
++    PROVIDE ( end = . );
++    PROVIDE ( _end = . );
++    . = . + _Min_Heap_Size;
++    . = . + _Min_Stack_Size;
++    . = ALIGN(4);
++  } >RAM
++
++
++
++  /* Remove information from the standard libraries */
++  /DISCARD/ :
++  {
++    libc.a ( * )
++    libm.a ( * )
++    libgcc.a ( * )
++  }
++
++  .ARM.attributes 0 : { *(.ARM.attributes) }
++}
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PeripheralPins.c STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PeripheralPins.c
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PeripheralPins.c	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PeripheralPins.c	2021-04-16 14:32:20.000000000 +0200
+@@ -0,0 +1,341 @@
++/*
++ *******************************************************************************
++ * Copyright (c) 2019, STMicroelectronics
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ * 1. Redistributions of source code must retain the above copyright notice,
++ *    this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright notice,
++ *    this list of conditions and the following disclaimer in the documentation
++ *    and/or other materials provided with the distribution.
++ * 3. Neither the name of STMicroelectronics nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
++ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
++ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *******************************************************************************
++ * Automatically generated from STM32F303R(D-E)Tx.xml
++ */
++#include "Arduino.h"
++#include "PeripheralPins.h"
++
++/* =====
++ * Note: Commented lines are alternative possibilities which are not used per default.
++ *       If you change them, you will have to know what you do
++ * =====
++ */
++
++//*** ADC ***
++
++#ifdef HAL_ADC_MODULE_ENABLED
++WEAK const PinMap PinMap_ADC[] = {
++  {PA_0,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC1_IN1 - A0
++  {PA_1,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // ADC1_IN2 - A1
++  //  {PA_2,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC1_IN3 - STLink Tx
++  //  {PA_3,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC1_IN4 - STLink Rx
++  {PA_4,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC2_IN1 - A2
++  //  {PA_5,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // ADC2_IN2 - LED1
++  {PA_6,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC2_IN3
++  {PA_7,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC2_IN4
++  {PB_0,  ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 12, 0)}, // ADC3_IN12
++  //  {PB_1,  ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC3_IN1
++  {PB_2,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 12, 0)}, // ADC2_IN12
++  {PB_11, ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 14, 0)}, // ADC1_IN14
++  //  {PB_11, ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 14, 0)}, // ADC2_IN14
++  //  {PB_12, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC4_IN3
++  //  {PB_13, ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC3_IN5
++  //  {PB_14, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC4_IN4
++  //  {PB_15, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC4_IN5
++  {PC_0,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 6, 0)}, // ADC1_IN6 - A5
++  //  {PC_0,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 6, 0)}, // ADC2_IN6 - A5
++  {PC_1,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 7, 0)}, // ADC1_IN7 - A4
++  //  {PC_1,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 7, 0)}, // ADC2_IN7 - A4
++  {PC_2,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 8, 0)}, // ADC1_IN8
++  //  {PC_2,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 8, 0)}, // ADC2_IN8
++  {PC_3,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 9, 0)}, // ADC1_IN9
++  //  {PC_3,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 9, 0)}, // ADC2_IN9
++  {PC_4,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC2_IN5
++  {PC_5,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 11, 0)}, // ADC2_IN11
++  {NC,    NP,    0}
++};
++#endif
++
++//*** DAC ***
++
++#ifdef HAL_DAC_MODULE_ENABLED
++WEAK const PinMap PinMap_DAC[] = {
++  {PA_4,  DAC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // DAC1_OUT1
++  {PA_5,  DAC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // DAC1_OUT2 - LED1
++  {NC,    NP,    0}
++};
++#endif
++
++//*** I2C ***
++
++#ifdef HAL_I2C_MODULE_ENABLED
++WEAK const PinMap PinMap_I2C_SDA[] = {
++  {PA_10, I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {PA_14, I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_5,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF8_I2C3)},
++  {PB_7,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_9,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PC_9,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF3_I2C3)},
++  {PF_0,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_I2C_MODULE_ENABLED
++WEAK const PinMap PinMap_I2C_SCL[] = {
++  {PA_8,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF3_I2C3)},
++  {PA_9,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {PA_15, I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_6,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_8,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PF_1,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** PWM ***
++
++#ifdef HAL_TIM_MODULE_ENABLED
++WEAK const PinMap PinMap_PWM[] = {
++  //  {PA_0,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  //  {PA_1,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 2, 0)}, // TIM2_CH2
++  {PA_1,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 1, 1)}, // TIM15_CH1N
++  //  {PA_2,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 3, 0)}, // TIM2_CH3 - STLink Tx
++  //  {PA_2,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 1, 0)}, // TIM15_CH1 - STLink Tx
++  //  {PA_3,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 4, 0)}, // TIM2_CH4 - STLink Rx
++  //  {PA_3,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 2, 0)}, // TIM15_CH2 - STLink Rx
++  {PA_4,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PA_5,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  //  {PA_6,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  {PA_6,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PA_7,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  //  {PA_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PA_7,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  {PA_7,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 0)}, // TIM17_CH1
++  {PA_8,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 0)}, // TIM1_CH1
++  {PA_9,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 0)}, // TIM1_CH2
++  //  {PA_9,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM2, 3, 0)}, // TIM2_CH3
++  {PA_10, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 0)}, // TIM1_CH3
++  //  {PA_10, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM2, 4, 0)}, // TIM2_CH4
++  //  {PA_11, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  {PA_11, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF11_TIM1, 4, 0)}, // TIM1_CH4
++  //  {PA_11, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 1, 0)}, // TIM4_CH1
++  //  {PA_12, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  //  {PA_12, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 2, 0)}, // TIM4_CH2
++  {PA_12, TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PA_13, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 3, 0)}, // TIM4_CH3
++  {PA_13, TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 1)}, // TIM16_CH1N
++  {PA_14, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_TIM8, 2, 0)}, // TIM8_CH2
++  //  {PA_15, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  {PA_15, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM8, 1, 0)}, // TIM8_CH1
++  {PB_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  //  {PB_0,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 3, 0)}, // TIM3_CH3
++  //  {PB_0,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  //  {PB_1,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 1)}, // TIM1_CH3N
++  //  {PB_1,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PB_1,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 1)}, // TIM8_CH3N
++  //  {PB_3,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 2, 0)}, // TIM2_CH2
++  {PB_3,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  //  {PB_4,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  //  {PB_4,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  {PB_4,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PB_5,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PB_5,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF3_TIM8, 3, 1)}, // TIM8_CH3N
++  {PB_5,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM17, 1, 0)}, // TIM17_CH1
++  //  {PB_6,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 1, 0)}, // TIM4_CH1
++  //  {PB_6,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_TIM8, 1, 0)}, // TIM8_CH1
++  {PB_6,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 1)}, // TIM16_CH1N
++  //  {PB_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PB_7,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 2, 0)}, // TIM4_CH2
++  {PB_7,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 1)}, // TIM17_CH1N
++  //  {PB_8,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 3, 0)}, // TIM4_CH3
++  //  {PB_8,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM8, 2, 0)}, // TIM8_CH2
++  {PB_8,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PB_9,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 4, 0)}, // TIM4_CH4
++  //  {PB_9,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM8, 3, 0)}, // TIM8_CH3
++  {PB_9,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 0)}, // TIM17_CH1
++  {PB_10, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 3, 0)}, // TIM2_CH3
++  //  {PB_11, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 4, 0)}, // TIM2_CH4
++  {PB_13, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  //  {PB_14, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  {PB_14, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM15, 1, 0)}, // TIM15_CH1
++  //  {PB_15, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM1, 3, 1)}, // TIM1_CH3N
++  //  {PB_15, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM15, 1, 1)}, // TIM15_CH1N
++  {PB_15, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM15, 2, 0)}, // TIM15_CH2
++  {PC_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 1, 0)}, // TIM1_CH1
++  {PC_1,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 2, 0)}, // TIM1_CH2
++  {PC_2,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 3, 0)}, // TIM1_CH3
++  {PC_3,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 4, 0)}, // TIM1_CH4
++  {PC_6,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  //  {PC_6,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 0)}, // TIM8_CH1
++  {PC_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PC_7,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 0)}, // TIM8_CH2
++  {PC_8,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 3, 0)}, // TIM3_CH3
++  //  {PC_8,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 0)}, // TIM8_CH3
++  {PC_9,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PC_9,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 4, 0)}, // TIM8_CH4
++  {PC_10, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  {PC_11, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  {PC_12, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 1)}, // TIM8_CH3N
++  {PC_13, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM1, 1, 1)}, // TIM1_CH1N
++  {PF_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 1)}, // TIM1_CH3N
++  {NC,    NP,    0}
++};
++#endif
++
++//*** SERIAL ***
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_TX[] = {
++  {PA_2,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_9,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_14, USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_3,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_6,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_9,  USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_10, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_4,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PC_10, UART4,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART4)},
++  //  {PC_10, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_12, UART5,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART5)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_RX[] = {
++  {PA_3,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_10, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_15, USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_4,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_7,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_8,  USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_11, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_5,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PC_11, UART4,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART4)},
++  //  {PC_11, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PD_2,  UART5,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART5)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_RTS[] = {
++  {PA_1,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_12, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_14, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_CTS[] = {
++  {PA_0,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_11, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_13, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_13, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** SPI ***
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_MOSI[] = {
++  {PA_7,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_11, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  //  {PB_5,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_5,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_15, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_12, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_MISO[] = {
++  {PA_6,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_10, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  //  {PB_4,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_4,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_14, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_11, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_SCLK[] = {
++  {PA_5,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)}, // LED1
++  //  {PB_3,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_3,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_13, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_10, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PF_1,  SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_SSEL[] = {
++  //  {PA_4,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_4,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  //  {PA_15, SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_15, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_12, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PF_0,  SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** CAN ***
++
++#ifdef HAL_CAN_MODULE_ENABLED
++WEAK const PinMap PinMap_CAN_RD[] = {
++  {PA_11, CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {PB_8,  CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_CAN_MODULE_ENABLED
++WEAK const PinMap PinMap_CAN_TD[] = {
++  {PA_12, CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {PB_9,  CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** No ETHERNET ***
++
++//*** No QUADSPI ***
++
++//*** USB ***
++
++#ifdef HAL_PCD_MODULE_ENABLED
++WEAK const PinMap PinMap_USB[] = {
++  {PA_11, USB, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, GPIO_AF_NONE)}, // USB_DM
++  {PA_12, USB, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, GPIO_AF_NONE)}, // USB_DP
++  {NC,    NP,    0}
++};
++#endif
++
++//*** No USB_OTG_FS ***
++
++//*** No USB_OTG_HS ***
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PinNamesVar.h STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PinNamesVar.h
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PinNamesVar.h	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/PinNamesVar.h	2020-05-15 00:00:00.000000000 +0200
+@@ -0,0 +1,30 @@
++/* SYS_WKUP */
++#ifdef PWR_WAKEUP_PIN1
++  SYS_WKUP1 = PA_0,
++#endif
++#ifdef PWR_WAKEUP_PIN2
++  SYS_WKUP2 = PC_13,
++#endif
++#ifdef PWR_WAKEUP_PIN3
++  SYS_WKUP3 = PE_6, /* manually updated */
++#endif
++#ifdef PWR_WAKEUP_PIN4
++  SYS_WKUP4 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN5
++  SYS_WKUP5 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN6
++  SYS_WKUP6 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN7
++  SYS_WKUP7 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN8
++  SYS_WKUP8 = NC,
++#endif
++/* USB */
++#ifdef USBCON
++  USB_DM = PA_11,
++  USB_DP = PA_12,
++#endif
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.cpp STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.cpp
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.cpp	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.cpp	2021-04-23 17:11:14.114998000 +0200
+@@ -0,0 +1,134 @@
++/*
++  Copyright (c) 2011 Arduino.  All right reserved.
++
++  This library is free software; you can redistribute it and/or
++  modify it under the terms of the GNU Lesser General Public
++  License as published by the Free Software Foundation; either
++  version 2.1 of the License, or (at your option) any later version.
++
++  This library is distributed in the hope that it will be useful,
++  but WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++  See the GNU Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public
++  License along with this library; if not, write to the Free Software
++  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++*/
++
++#include "pins_arduino.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++// Pin number
++const PinName digitalPin[] = {
++  PA_3,  //D0
++  PA_2,  //D1
++  PA_10, //D2
++  PB_3,  //D3
++  PB_5,  //D4
++  PB_4,  //D5
++  PB_10, //D6
++  PA_8,  //D7
++  PA_9,  //D8
++  PC_7,  //D9
++  PB_6,  //D10
++  PA_7,  //D11
++  PA_6,  //D12
++  PA_5,  //D13
++  PB_9,  //D14
++  PB_8,  //D15
++  // ST Morpho
++  // CN7 Left Side
++  PC_10, //D16
++  PC_12, //D17
++  PF_11, //D18 - BOOT0
++  PA_13, //D19 - SWD
++  PA_14, //D20 - SWD
++  PA_15, //D21
++  PB_7,  //D22
++  PC_13, //D23
++  PC_14, //D24
++  PC_15, //D25
++  PF_0,  //D26
++  PF_1,  //D27
++  PC_2,  //D28
++  PC_3,  //D29
++  // CN7 Right Side
++  PC_11, //D30
++  PD_2,  //D31
++  // CN10 Left Side
++  PC_9,  //D32
++  // CN10 Right side
++  PC_8,  //D33
++  PC_6,  //D34
++  PC_5,  //D35
++  PA_12, //D36
++  PA_11, //D37
++  PB_12, //D38
++  PB_11, //D39
++  PB_2,  //D40
++  PB_1,  //D41
++  PB_15, //D42
++  PB_14, //D43
++  PB_13, //D44
++  PC_4,  //D45
++  PA_0,  //D46/A0
++  PA_1,  //D47/A1
++  PA_4,  //D48/A2
++  PB_0,  //D49/A3
++  PC_1,  //D50/A4
++  PC_0   //D51/A5
++};
++
++// Analog (Ax) pin number array
++const uint32_t analogInputPin[] = {
++  42,
++  43,
++  44,
++  38
++};
++
++#ifdef __cplusplus
++}
++#endif
++
++// ----------------------------------------------------------------------------
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++/**
++  * @brief  System Clock Configuration
++  * @param  None
++  * @retval None
++  */
++WEAK void SystemClock_Config(void)
++{
++  RCC_OscInitTypeDef RCC_OscInitStruct;
++  RCC_ClkInitTypeDef RCC_ClkInitStruct;
++
++  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
++  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
++  RCC_OscInitStruct.HSICalibrationValue = 16;
++  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
++  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
++  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
++  RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV1;
++  HAL_RCC_OscConfig(&RCC_OscInitStruct);
++
++  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
++                                | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
++  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
++  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
++  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
++  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
++  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
++}
++
++#ifdef __cplusplus
++}
++#endif
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.h STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.h
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.h	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors/variant_generic.h	2021-04-23 16:51:19.582061000 +0200
+@@ -0,0 +1,147 @@
++/*
++  Copyright (c) 2011 Arduino.  All right reserved.
++
++  This library is free software; you can redistribute it and/or
++  modify it under the terms of the GNU Lesser General Public
++  License as published by the Free Software Foundation; either
++  version 2.1 of the License, or (at your option) any later version.
++
++  This library is distributed in the hope that it will be useful,
++  but WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++  See the GNU Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public
++  License along with this library; if not, write to the Free Software
++  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++*/
++
++#ifndef _VARIANT_ARDUINO_STM32_
++#define _VARIANT_ARDUINO_STM32_
++
++#ifdef __cplusplus
++extern "C" {
++#endif // __cplusplus
++
++/*----------------------------------------------------------------------------
++ *        Pins
++ *----------------------------------------------------------------------------*/
++
++#define PA3  0
++#define PA2  1
++#define PA10 2
++#define PB3  3
++#define PB5  4
++#define PB4  5
++#define PB10 6
++#define PA8  7
++#define PA9  8
++#define PC7  9
++#define PB6  10
++#define PA7  A6
++#define PA6  A7
++#define PA5  13
++#define PB9  14
++#define PB8  15
++// ST Morpho
++// CN7 Left Side
++#define PC10 16
++#define PC12 17
++#define PF11 18 // BOOT0
++#define PA13 19 // SWD
++#define PA14 20 // SWD
++#define PA15 21
++#define PB7  22
++#define PC13 23
++#define PC14 24
++#define PC15 25
++#define PF0  26
++#define PF1  27
++#define PC2  A8
++#define PC3  A9
++// CN7 Right Side
++#define PC11 30
++#define PD2  31
++// CN10 Left Side
++#define PC9  32
++// CN10 Right side
++#define PC8  33
++#define PC6  34
++#define PC5  A10
++#define PA12 36
++#define PA11 37
++#define PB12 38
++#define PB11 A11
++#define PB2  A12
++#define PB1  41
++#define PB15 42
++#define PB14 43
++#define PB13 44
++#define PC4  A13
++#define PA0  A0
++#define PA1  A1
++#define PA4  A2
++#define PB0  A3
++#define PC1  A4
++#define PC0  A5
++
++// This must be a literal
++#define NUM_DIGITAL_PINS        52
++// This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
++#define NUM_ANALOG_INPUTS       4
++
++#define PIN_WIRE_SDA            32// = I2C3  // Default for Arduino connector compatibility
++#define PIN_WIRE_SCL            7 // = I2C3  // Default for Arduino connector compatibility
++
++
++// On-board LED pin number
++//#define LED_BUILTIN             13
++//#define LED_GREEN               LED_BUILTIN
++
++// On-board user button
++#define USER_BTN                PC13
++
++// Timer Definitions
++// Use TIM6/TIM7 when possible as servo and tone don't need GPIO output pin
++//#define TIMER_TONE              TIM6
++//#define TIMER_SERVO             TIM7
++
++// UART Definitions
++#define SERIAL_UART_INSTANCE    1 //Connected to ST-Link
++
++// Default pin used for 'Serial' instance (ex: ST-Link)
++// Mandatory for Firmata
++#define PIN_SERIAL_RX           2
++#define PIN_SERIAL_TX           8
++
++/* Extra HAL modules */
++#define HAL_DAC_MODULE_ENABLED
++
++#ifdef __cplusplus
++} // extern "C"
++#endif
++/*----------------------------------------------------------------------------
++ *        Arduino objects - C++ only
++ *----------------------------------------------------------------------------*/
++
++#ifdef __cplusplus
++  // These serial port names are intended to allow libraries and architecture-neutral
++  // sketches to automatically default to the correct port name for a particular type
++  // of use.  For example, a GPS module would normally connect to SERIAL_PORT_HARDWARE_OPEN,
++  // the first hardware serial port whose RX/TX pins are not dedicated to another use.
++  //
++  // SERIAL_PORT_MONITOR        Port which normally prints to the Arduino Serial Monitor
++  //
++  // SERIAL_PORT_USBVIRTUAL     Port which is USB virtual serial
++  //
++  // SERIAL_PORT_LINUXBRIDGE    Port which connects to a Linux system via Bridge library
++  //
++  // SERIAL_PORT_HARDWARE       Hardware serial port, physical RX & TX pins.
++  //
++  // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
++  //                            pins are NOT connected to anything by default.
++  #define SERIAL_PORT_MONITOR     Serial
++  #define SERIAL_PORT_HARDWARE    Serial
++#endif
++
++#endif /* _VARIANT_ARDUINO_STM32_ */
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/ldscript.ld STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/ldscript.ld
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/ldscript.ld	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/ldscript.ld	2021-04-16 14:25:59.000000000 +0200
+@@ -0,0 +1,180 @@
++/**
++  ******************************************************************************
++  * @file    STM32F303RE_FLASH.h
++  * @author  WI6LABS
++  * @version V1.0.0
++  * @date    27-July-2016
++  * @brief   Linker script for STM32F303RE Device with
++  *          512KByte FLASH, 80KByte RAM
++  *
++  *          Set heap size, stack size and stack location according
++  *          to application requirements.
++  *
++  *          Set memory bank area and size if external memory is used.
++  *
++  ******************************************************************************
++  * @attention
++  *
++  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
++  *
++  * Redistribution and use in source and binary forms, with or without modification,
++  * are permitted provided that the following conditions are met:
++  *   1. Redistributions of source code must retain the above copyright notice,
++  *      this list of conditions and the following disclaimer.
++  *   2. Redistributions in binary form must reproduce the above copyright notice,
++  *      this list of conditions and the following disclaimer in the documentation
++  *      and/or other materials provided with the distribution.
++  *   3. Neither the name of STMicroelectronics nor the names of its contributors
++  *      may be used to endorse or promote products derived from this software
++  *      without specific prior written permission.
++  *
++  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
++  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
++  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
++  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++  *
++  ******************************************************************************
++  */
++
++/* Entry Point */
++ENTRY(Reset_Handler)
++
++/* Highest address of the user mode stack */
++_estack = 0x20010000;    /* end of RAM */
++/* Generate a link error if heap and stack don't fit into RAM */
++_Min_Heap_Size = 0x200;;      /* required amount of heap  */
++_Min_Stack_Size = 0x400;; /* required amount of stack */
++
++/* Specify the memory areas */
++MEMORY
++{
++FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 384K
++RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 64K
++}
++
++/* Define output sections */
++SECTIONS
++{
++  /* The startup code goes first into FLASH */
++  .isr_vector :
++  {
++    . = ALIGN(4);
++    KEEP(*(.isr_vector)) /* Startup code */
++    . = ALIGN(4);
++  } >FLASH
++
++  /* The program code and other data goes into FLASH */
++  .text ALIGN(4):
++  {
++    . = ALIGN(4);
++    *(.text)           /* .text sections (code) */
++    *(.text*)          /* .text* sections (code) */
++    *(.glue_7)         /* glue arm to thumb code */
++    *(.glue_7t)        /* glue thumb to arm code */
++    *(.eh_frame)
++
++    KEEP (*(.init))
++    KEEP (*(.fini))
++
++    . = ALIGN(4);
++    _etext = .;        /* define a global symbols at end of code */
++  } >FLASH
++
++  /* Constant data goes into FLASH */
++  .rodata ALIGN(4):
++  {
++    . = ALIGN(4);
++    *(.rodata)         /* .rodata sections (constants, strings, etc.) */
++    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
++    . = ALIGN(4);
++  } >FLASH
++
++  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
++  .ARM : {
++    __exidx_start = .;
++    *(.ARM.exidx*)
++    __exidx_end = .;
++  } >FLASH
++
++  .preinit_array     :
++  {
++    PROVIDE_HIDDEN (__preinit_array_start = .);
++    KEEP (*(.preinit_array*))
++    PROVIDE_HIDDEN (__preinit_array_end = .);
++  } >FLASH
++  .init_array :
++  {
++    PROVIDE_HIDDEN (__init_array_start = .);
++    KEEP (*(SORT(.init_array.*)))
++    KEEP (*(.init_array*))
++    PROVIDE_HIDDEN (__init_array_end = .);
++  } >FLASH
++  .fini_array :
++  {
++    PROVIDE_HIDDEN (__fini_array_start = .);
++    KEEP (*(SORT(.fini_array.*)))
++    KEEP (*(.fini_array*))
++    PROVIDE_HIDDEN (__fini_array_end = .);
++  } >FLASH
++
++  /* used by the startup to initialize data */
++  _sidata = LOADADDR(.data);
++
++  /* Initialized data sections goes into RAM, load LMA copy after code */
++  .data :
++  {
++    . = ALIGN(4);
++    _sdata = .;        /* create a global symbol at data start */
++    *(.data)           /* .data sections */
++    *(.data*)          /* .data* sections */
++
++    . = ALIGN(4);
++    _edata = .;        /* define a global symbol at data end */
++  } >RAM AT> FLASH
++
++
++  /* Uninitialized data section */
++  . = ALIGN(4);
++  .bss :
++  {
++    /* This is used by the startup in order to initialize the .bss secion */
++    _sbss = .;         /* define a global symbol at bss start */
++    __bss_start__ = _sbss;
++    *(.bss)
++    *(.bss*)
++    *(COMMON)
++
++    . = ALIGN(4);
++    _ebss = .;         /* define a global symbol at bss end */
++    __bss_end__ = _ebss;
++  } >RAM
++
++  /* User_heap_stack section, used to check that there is enough RAM left */
++  ._user_heap_stack :
++  {
++    . = ALIGN(4);
++    PROVIDE ( end = . );
++    PROVIDE ( _end = . );
++    . = . + _Min_Heap_Size;
++    . = . + _Min_Stack_Size;
++    . = ALIGN(4);
++  } >RAM
++
++
++
++  /* Remove information from the standard libraries */
++  /DISCARD/ :
++  {
++    libc.a ( * )
++    libm.a ( * )
++    libgcc.a ( * )
++  }
++
++  .ARM.attributes 0 : { *(.ARM.attributes) }
++}
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PeripheralPins.c STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PeripheralPins.c
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PeripheralPins.c	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PeripheralPins.c	2021-04-16 14:32:20.000000000 +0200
+@@ -0,0 +1,341 @@
++/*
++ *******************************************************************************
++ * Copyright (c) 2019, STMicroelectronics
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ * 1. Redistributions of source code must retain the above copyright notice,
++ *    this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright notice,
++ *    this list of conditions and the following disclaimer in the documentation
++ *    and/or other materials provided with the distribution.
++ * 3. Neither the name of STMicroelectronics nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
++ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
++ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *******************************************************************************
++ * Automatically generated from STM32F303R(D-E)Tx.xml
++ */
++#include "Arduino.h"
++#include "PeripheralPins.h"
++
++/* =====
++ * Note: Commented lines are alternative possibilities which are not used per default.
++ *       If you change them, you will have to know what you do
++ * =====
++ */
++
++//*** ADC ***
++
++#ifdef HAL_ADC_MODULE_ENABLED
++WEAK const PinMap PinMap_ADC[] = {
++  {PA_0,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC1_IN1 - A0
++  {PA_1,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // ADC1_IN2 - A1
++  //  {PA_2,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC1_IN3 - STLink Tx
++  //  {PA_3,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC1_IN4 - STLink Rx
++  {PA_4,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC2_IN1 - A2
++  //  {PA_5,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // ADC2_IN2 - LED1
++  {PA_6,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC2_IN3
++  {PA_7,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC2_IN4
++  {PB_0,  ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 12, 0)}, // ADC3_IN12
++  //  {PB_1,  ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // ADC3_IN1
++  {PB_2,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 12, 0)}, // ADC2_IN12
++  {PB_11, ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 14, 0)}, // ADC1_IN14
++  //  {PB_11, ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 14, 0)}, // ADC2_IN14
++  //  {PB_12, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)}, // ADC4_IN3
++  //  {PB_13, ADC3,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC3_IN5
++  //  {PB_14, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 4, 0)}, // ADC4_IN4
++  //  {PB_15, ADC4,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC4_IN5
++  {PC_0,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 6, 0)}, // ADC1_IN6 - A5
++  //  {PC_0,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 6, 0)}, // ADC2_IN6 - A5
++  {PC_1,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 7, 0)}, // ADC1_IN7 - A4
++  //  {PC_1,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 7, 0)}, // ADC2_IN7 - A4
++  {PC_2,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 8, 0)}, // ADC1_IN8
++  //  {PC_2,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 8, 0)}, // ADC2_IN8
++  {PC_3,  ADC1,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 9, 0)}, // ADC1_IN9
++  //  {PC_3,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 9, 0)}, // ADC2_IN9
++  {PC_4,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)}, // ADC2_IN5
++  {PC_5,  ADC2,  STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 11, 0)}, // ADC2_IN11
++  {NC,    NP,    0}
++};
++#endif
++
++//*** DAC ***
++
++#ifdef HAL_DAC_MODULE_ENABLED
++WEAK const PinMap PinMap_DAC[] = {
++  {PA_4,  DAC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)}, // DAC1_OUT1
++  {PA_5,  DAC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)}, // DAC1_OUT2 - LED1
++  {NC,    NP,    0}
++};
++#endif
++
++//*** I2C ***
++
++#ifdef HAL_I2C_MODULE_ENABLED
++WEAK const PinMap PinMap_I2C_SDA[] = {
++  {PA_10, I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {PA_14, I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_5,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF8_I2C3)},
++  {PB_7,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_9,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PC_9,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF3_I2C3)},
++  {PF_0,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_I2C_MODULE_ENABLED
++WEAK const PinMap PinMap_I2C_SCL[] = {
++  {PA_8,  I2C3, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF3_I2C3)},
++  {PA_9,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {PA_15, I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_6,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PB_8,  I2C1, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1)},
++  {PF_1,  I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C2)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** PWM ***
++
++#ifdef HAL_TIM_MODULE_ENABLED
++WEAK const PinMap PinMap_PWM[] = {
++  //  {PA_0,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  //  {PA_1,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 2, 0)}, // TIM2_CH2
++  {PA_1,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 1, 1)}, // TIM15_CH1N
++  //  {PA_2,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 3, 0)}, // TIM2_CH3 - STLink Tx
++  //  {PA_2,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 1, 0)}, // TIM15_CH1 - STLink Tx
++  //  {PA_3,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 4, 0)}, // TIM2_CH4 - STLink Rx
++  //  {PA_3,  TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF9_TIM15, 2, 0)}, // TIM15_CH2 - STLink Rx
++  {PA_4,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PA_5,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  //  {PA_6,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  {PA_6,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PA_7,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  //  {PA_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PA_7,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  {PA_7,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 0)}, // TIM17_CH1
++  {PA_8,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 0)}, // TIM1_CH1
++  {PA_9,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 0)}, // TIM1_CH2
++  //  {PA_9,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM2, 3, 0)}, // TIM2_CH3
++  {PA_10, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 0)}, // TIM1_CH3
++  //  {PA_10, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM2, 4, 0)}, // TIM2_CH4
++  //  {PA_11, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  {PA_11, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF11_TIM1, 4, 0)}, // TIM1_CH4
++  //  {PA_11, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 1, 0)}, // TIM4_CH1
++  //  {PA_12, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  //  {PA_12, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 2, 0)}, // TIM4_CH2
++  {PA_12, TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PA_13, TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM4, 3, 0)}, // TIM4_CH3
++  {PA_13, TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 1)}, // TIM16_CH1N
++  {PA_14, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_TIM8, 2, 0)}, // TIM8_CH2
++  //  {PA_15, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 1, 0)}, // TIM2_CH1
++  {PA_15, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM8, 1, 0)}, // TIM8_CH1
++  {PB_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  //  {PB_0,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 3, 0)}, // TIM3_CH3
++  //  {PB_0,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  //  {PB_1,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 1)}, // TIM1_CH3N
++  //  {PB_1,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PB_1,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 1)}, // TIM8_CH3N
++  //  {PB_3,  TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 2, 0)}, // TIM2_CH2
++  {PB_3,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  //  {PB_4,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  //  {PB_4,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  {PB_4,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PB_5,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PB_5,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF3_TIM8, 3, 1)}, // TIM8_CH3N
++  {PB_5,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM17, 1, 0)}, // TIM17_CH1
++  //  {PB_6,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 1, 0)}, // TIM4_CH1
++  //  {PB_6,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_TIM8, 1, 0)}, // TIM8_CH1
++  {PB_6,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 1)}, // TIM16_CH1N
++  //  {PB_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PB_7,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 2, 0)}, // TIM4_CH2
++  {PB_7,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 1)}, // TIM17_CH1N
++  //  {PB_8,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 3, 0)}, // TIM4_CH3
++  //  {PB_8,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM8, 2, 0)}, // TIM8_CH2
++  {PB_8,  TIM16,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM16, 1, 0)}, // TIM16_CH1
++  //  {PB_9,  TIM4,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM4, 4, 0)}, // TIM4_CH4
++  //  {PB_9,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF10_TIM8, 3, 0)}, // TIM8_CH3
++  {PB_9,  TIM17,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM17, 1, 0)}, // TIM17_CH1
++  {PB_10, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 3, 0)}, // TIM2_CH3
++  //  {PB_11, TIM2,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM2, 4, 0)}, // TIM2_CH4
++  {PB_13, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 1, 1)}, // TIM1_CH1N
++  //  {PB_14, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 2, 1)}, // TIM1_CH2N
++  {PB_14, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM15, 1, 0)}, // TIM15_CH1
++  //  {PB_15, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM1, 3, 1)}, // TIM1_CH3N
++  //  {PB_15, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM15, 1, 1)}, // TIM15_CH1N
++  {PB_15, TIM15,  STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_TIM15, 2, 0)}, // TIM15_CH2
++  {PC_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 1, 0)}, // TIM1_CH1
++  {PC_1,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 2, 0)}, // TIM1_CH2
++  {PC_2,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 3, 0)}, // TIM1_CH3
++  {PC_3,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM1, 4, 0)}, // TIM1_CH4
++  {PC_6,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 1, 0)}, // TIM3_CH1
++  //  {PC_6,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 0)}, // TIM8_CH1
++  {PC_7,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 2, 0)}, // TIM3_CH2
++  //  {PC_7,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 0)}, // TIM8_CH2
++  {PC_8,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 3, 0)}, // TIM3_CH3
++  //  {PC_8,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 0)}, // TIM8_CH3
++  {PC_9,  TIM3,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM3, 4, 0)}, // TIM3_CH4
++  //  {PC_9,  TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 4, 0)}, // TIM8_CH4
++  {PC_10, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 1, 1)}, // TIM8_CH1N
++  {PC_11, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 2, 1)}, // TIM8_CH2N
++  {PC_12, TIM8,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM8, 3, 1)}, // TIM8_CH3N
++  {PC_13, TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_TIM1, 1, 1)}, // TIM1_CH1N
++  {PF_0,  TIM1,   STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_TIM1, 3, 1)}, // TIM1_CH3N
++  {NC,    NP,    0}
++};
++#endif
++
++//*** SERIAL ***
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_TX[] = {
++  {PA_2,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_9,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_14, USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_3,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_6,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_9,  USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_10, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_4,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PC_10, UART4,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART4)},
++  //  {PC_10, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_12, UART5,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART5)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_RX[] = {
++  {PA_3,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_10, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_15, USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_4,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PB_7,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_8,  USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_11, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PC_5,  USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PC_11, UART4,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART4)},
++  //  {PC_11, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PD_2,  UART5,   STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_UART5)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_RTS[] = {
++  {PA_1,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_12, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PB_14, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_UART_MODULE_ENABLED
++WEAK const PinMap PinMap_UART_CTS[] = {
++  {PA_0,  USART2,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2)},
++  {PA_11, USART1,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART1)},
++  {PA_13, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {PB_13, USART3,  STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART3)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** SPI ***
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_MOSI[] = {
++  {PA_7,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_11, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  //  {PB_5,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_5,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_15, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_12, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_MISO[] = {
++  {PA_6,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_10, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  //  {PB_4,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_4,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_14, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_11, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_SCLK[] = {
++  {PA_5,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)}, // LED1
++  //  {PB_3,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PB_3,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_13, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PC_10, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PF_1,  SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_SPI_MODULE_ENABLED
++WEAK const PinMap PinMap_SPI_SSEL[] = {
++  //  {PA_4,  SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_4,  SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  //  {PA_15, SPI1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI1)},
++  {PA_15, SPI3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF6_SPI3)},
++  {PB_12, SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {PF_0,  SPI2, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF5_SPI2)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** CAN ***
++
++#ifdef HAL_CAN_MODULE_ENABLED
++WEAK const PinMap PinMap_CAN_RD[] = {
++  {PA_11, CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {PB_8,  CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {NC,    NP,    0}
++};
++#endif
++
++#ifdef HAL_CAN_MODULE_ENABLED
++WEAK const PinMap PinMap_CAN_TD[] = {
++  {PA_12, CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {PB_9,  CAN1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, GPIO_AF9_CAN)},
++  {NC,    NP,    0}
++};
++#endif
++
++//*** No ETHERNET ***
++
++//*** No QUADSPI ***
++
++//*** USB ***
++
++#ifdef HAL_PCD_MODULE_ENABLED
++WEAK const PinMap PinMap_USB[] = {
++  {PA_11, USB, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, GPIO_AF_NONE)}, // USB_DM
++  {PA_12, USB, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, GPIO_AF_NONE)}, // USB_DP
++  {NC,    NP,    0}
++};
++#endif
++
++//*** No USB_OTG_FS ***
++
++//*** No USB_OTG_HS ***
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PinNamesVar.h STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PinNamesVar.h
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PinNamesVar.h	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/PinNamesVar.h	2020-05-15 00:00:00.000000000 +0200
+@@ -0,0 +1,30 @@
++/* SYS_WKUP */
++#ifdef PWR_WAKEUP_PIN1
++  SYS_WKUP1 = PA_0,
++#endif
++#ifdef PWR_WAKEUP_PIN2
++  SYS_WKUP2 = PC_13,
++#endif
++#ifdef PWR_WAKEUP_PIN3
++  SYS_WKUP3 = PE_6, /* manually updated */
++#endif
++#ifdef PWR_WAKEUP_PIN4
++  SYS_WKUP4 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN5
++  SYS_WKUP5 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN6
++  SYS_WKUP6 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN7
++  SYS_WKUP7 = NC,
++#endif
++#ifdef PWR_WAKEUP_PIN8
++  SYS_WKUP8 = NC,
++#endif
++/* USB */
++#ifdef USBCON
++  USB_DM = PA_11,
++  USB_DP = PA_12,
++#endif
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.cpp STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.cpp
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.cpp	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.cpp	2021-04-16 15:13:22.000000000 +0200
+@@ -0,0 +1,154 @@
++/*
++  Copyright (c) 2011 Arduino.  All right reserved.
++
++  This library is free software; you can redistribute it and/or
++  modify it under the terms of the GNU Lesser General Public
++  License as published by the Free Software Foundation; either
++  version 2.1 of the License, or (at your option) any later version.
++
++  This library is distributed in the hope that it will be useful,
++  but WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++  See the GNU Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public
++  License along with this library; if not, write to the Free Software
++  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++*/
++
++#include "pins_arduino.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++// Pin number
++const PinName digitalPin[] = {
++  PA_3,  //D0
++  PA_2,  //D1
++  PA_10, //D2
++  PB_3,  //D3
++  PB_5,  //D4
++  PB_4,  //D5
++  PB_10, //D6
++  PA_8,  //D7
++  PA_9,  //D8
++  PC_7,  //D9
++  PB_6,  //D10
++  PA_7,  //D11
++  PA_6,  //D12
++  PA_5,  //D13
++  PB_9,  //D14
++  PB_8,  //D15
++  // ST Morpho
++  // CN7 Left Side
++  PC_10, //D16
++  PC_12, //D17
++  PF_11, //D18 - BOOT0
++  PA_13, //D19 - SWD
++  PA_14, //D20 - SWD
++  PA_15, //D21
++  PB_7,  //D22
++  PC_13, //D23
++  PC_14, //D24
++  PC_15, //D25
++  PF_0,  //D26
++  PF_1,  //D27
++  PC_2,  //D28
++  PC_3,  //D29
++  // CN7 Right Side
++  PC_11, //D30
++  PD_2,  //D31
++  // CN10 Left Side
++  PC_9,  //D32
++  // CN10 Right side
++  PC_8,  //D33
++  PC_6,  //D34
++  PC_5,  //D35
++  PA_12, //D36
++  PA_11, //D37
++  PB_12, //D38
++  PB_11, //D39
++  PB_2,  //D40
++  PB_1,  //D41
++  PB_15, //D42
++  PB_14, //D43
++  PB_13, //D44
++  PC_4,  //D45
++  PA_0,  //D46/A0
++  PA_1,  //D47/A1
++  PA_4,  //D48/A2
++  PB_0,  //D49/A3
++  PC_1,  //D50/A4
++  PC_0   //D51/A5
++};
++
++// Analog (Ax) pin number array
++const uint32_t analogInputPin[] = {
++  42,
++  43,
++  44,
++  38
++};
++
++#ifdef __cplusplus
++}
++#endif
++
++// ----------------------------------------------------------------------------
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++/**
++  * @brief  System Clock Configuration
++  * @param  None
++  * @retval None
++  */
++WEAK void SystemClock_Config(void)
++{
++  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
++  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
++  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
++
++  /** Initializes the RCC Oscillators according to the specified parameters
++  * in the RCC_OscInitTypeDef structure.
++  */
++  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
++  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
++  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
++  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
++  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
++  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
++  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL4;
++  RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV1;
++  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
++  {
++    Error_Handler();
++  }
++  /** Initializes the CPU, AHB and APB buses clocks
++  */
++  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
++                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
++  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
++  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
++  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
++  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
++
++  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
++  {
++    Error_Handler();
++  }
++  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB|RCC_PERIPHCLK_I2C3;
++  PeriphClkInit.I2c3ClockSelection = RCC_I2C3CLKSOURCE_HSI;
++  PeriphClkInit.USBClockSelection = RCC_USBCLKSOURCE_PLL;
++  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
++  {
++    Error_Handler();
++  }
++}
++
++#ifdef __cplusplus
++}
++#endif
+diff --color -Naur STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.h STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.h
+--- STMicroelectronics_orig/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.h	1970-01-01 01:00:00.000000000 +0100
++++ STMicroelectronics/hardware/stm32/2.0.0/variants/BBoneSensorsCape/BBoneSensors-USB/variant_generic.h	2021-04-23 16:51:19.582061000 +0200
+@@ -0,0 +1,147 @@
++/*
++  Copyright (c) 2011 Arduino.  All right reserved.
++
++  This library is free software; you can redistribute it and/or
++  modify it under the terms of the GNU Lesser General Public
++  License as published by the Free Software Foundation; either
++  version 2.1 of the License, or (at your option) any later version.
++
++  This library is distributed in the hope that it will be useful,
++  but WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++  See the GNU Lesser General Public License for more details.
++
++  You should have received a copy of the GNU Lesser General Public
++  License along with this library; if not, write to the Free Software
++  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++*/
++
++#ifndef _VARIANT_ARDUINO_STM32_
++#define _VARIANT_ARDUINO_STM32_
++
++#ifdef __cplusplus
++extern "C" {
++#endif // __cplusplus
++
++/*----------------------------------------------------------------------------
++ *        Pins
++ *----------------------------------------------------------------------------*/
++
++#define PA3  0
++#define PA2  1
++#define PA10 2
++#define PB3  3
++#define PB5  4
++#define PB4  5
++#define PB10 6
++#define PA8  7
++#define PA9  8
++#define PC7  9
++#define PB6  10
++#define PA7  A6
++#define PA6  A7
++#define PA5  13
++#define PB9  14
++#define PB8  15
++// ST Morpho
++// CN7 Left Side
++#define PC10 16
++#define PC12 17
++#define PF11 18 // BOOT0
++#define PA13 19 // SWD
++#define PA14 20 // SWD
++#define PA15 21
++#define PB7  22
++#define PC13 23
++#define PC14 24
++#define PC15 25
++#define PF0  26
++#define PF1  27
++#define PC2  A8
++#define PC3  A9
++// CN7 Right Side
++#define PC11 30
++#define PD2  31
++// CN10 Left Side
++#define PC9  32
++// CN10 Right side
++#define PC8  33
++#define PC6  34
++#define PC5  A10
++#define PA12 36
++#define PA11 37
++#define PB12 38
++#define PB11 A11
++#define PB2  A12
++#define PB1  41
++#define PB15 42
++#define PB14 43
++#define PB13 44
++#define PC4  A13
++#define PA0  A0
++#define PA1  A1
++#define PA4  A2
++#define PB0  A3
++#define PC1  A4
++#define PC0  A5
++
++// This must be a literal
++#define NUM_DIGITAL_PINS        52
++// This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
++#define NUM_ANALOG_INPUTS       4
++
++#define PIN_WIRE_SDA            32// = I2C3  // Default for Arduino connector compatibility
++#define PIN_WIRE_SCL            7 // = I2C3  // Default for Arduino connector compatibility
++
++
++// On-board LED pin number
++//#define LED_BUILTIN             13
++//#define LED_GREEN               LED_BUILTIN
++
++// On-board user button
++#define USER_BTN                PC13
++
++// Timer Definitions
++// Use TIM6/TIM7 when possible as servo and tone don't need GPIO output pin
++//#define TIMER_TONE              TIM6
++//#define TIMER_SERVO             TIM7
++
++// UART Definitions
++#define SERIAL_UART_INSTANCE    1 //Connected to ST-Link
++
++// Default pin used for 'Serial' instance (ex: ST-Link)
++// Mandatory for Firmata
++#define PIN_SERIAL_RX           2
++#define PIN_SERIAL_TX           8
++
++/* Extra HAL modules */
++#define HAL_DAC_MODULE_ENABLED
++
++#ifdef __cplusplus
++} // extern "C"
++#endif
++/*----------------------------------------------------------------------------
++ *        Arduino objects - C++ only
++ *----------------------------------------------------------------------------*/
++
++#ifdef __cplusplus
++  // These serial port names are intended to allow libraries and architecture-neutral
++  // sketches to automatically default to the correct port name for a particular type
++  // of use.  For example, a GPS module would normally connect to SERIAL_PORT_HARDWARE_OPEN,
++  // the first hardware serial port whose RX/TX pins are not dedicated to another use.
++  //
++  // SERIAL_PORT_MONITOR        Port which normally prints to the Arduino Serial Monitor
++  //
++  // SERIAL_PORT_USBVIRTUAL     Port which is USB virtual serial
++  //
++  // SERIAL_PORT_LINUXBRIDGE    Port which connects to a Linux system via Bridge library
++  //
++  // SERIAL_PORT_HARDWARE       Hardware serial port, physical RX & TX pins.
++  //
++  // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
++  //                            pins are NOT connected to anything by default.
++  #define SERIAL_PORT_MONITOR     Serial
++  #define SERIAL_PORT_HARDWARE    Serial
++#endif
++
++#endif /* _VARIANT_ARDUINO_STM32_ */
